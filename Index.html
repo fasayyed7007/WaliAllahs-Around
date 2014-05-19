@@ -1,7 +1,237 @@
+<?PHP
+$mysql_host = "mysql.hostinger.in";
+$mysql_database = "u306529980_wa";
+$mysql_user = "u306529980_wa";
+$mysql_password = "Allahu7007";
+$dbcnx = @mysql_connect($mysql_host, $mysql_user, $mysql_password);
+if (!$dbcnx) 	{ exit('<p>Unable to connect to the ' . 'database server at this time.</p>'); 	}// Select the clist database
+if (!@mysql_select_db($mysql_database)) 
+	{ 	exit('<p>Unable to locate ' . 'database at this time.</p>'); }
+?>
 <html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>WaliAllahs Around - Add Page</title>
+<style>
+<!--
+		.wb-stl-heading3 { font: normal normal 16px Trebuchet MS,sans-serif; text-align: left; text-decoration: none; color: #858585; line-height: normal; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
+-->
+</style>
+</head>
+
 <body>
-<h1>
-WALIALLAHS-AROUND
-</h1>
+<center>
+<h3>	<font face="Lucida Sans Unicode"> Auzubillah Minashaitan Nirajeem <br> Bismillah Hirrahman Nirrahim</font></h3>
+<form method="post" action="save.php">
+<div align="center">
+	<table border="1" cellpadding="0" cellspacing="0" bordercolorlight="#000000" bordercolordark="#000000" >
+		<tr>
+			<td>
+
+<div align="center">
+	<table border="0" cellspacing="1" bordercolorlight="#000000" bordercolordark="#000000">
+		<!-- MSTableType="layout" -->
+		<tr>
+			<td></td>
+			<td align="left" valign="top" rowspan="2">
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="Name" size="60" value="Hazrat" style="font-family: Lucida Sans Unicode; color: #0000FF; font-size: 12pt"></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top" >
+			<font face="Lucida Sans Unicode">Name Of Dargah </font></td>
+			</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Address Of Dargah</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<textarea rows="4" name="Address" cols="40" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">Dargah Hazrat</textarea></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Silsila / Chain</font></td>
+			<td align="left" valign="top">
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="Chain" size="40" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF" value="UnKnown"></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">City</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="City" size="20" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF" value="UnKnown"></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">State</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<select size="1" name="State" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">		
+		<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+		</option>
+		<option value="Andhra Pradesh">Andhra Pradesh</option>
+		<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+		<option value="Assam">Assam</option>
+		<option value="Bihar">Bihar</option>
+		<option value="Chandigarh">Chandigarh</option>
+		<option value="Chhattisgarh">Chhattisgarh</option>
+		<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+		<option value="Daman and Diu">Daman and Diu</option>
+		<option value="Delhi">Delhi</option>
+		<option value="Goa">Goa</option>
+		<option value="Gujarat">Gujarat</option>
+		<option value="Haryana">Haryana</option>
+		<option value="Himachal Pradesh">Himachal Pradesh</option>
+		<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+		<option value="Jharkhand">Jharkhand</option>
+		<option value="Karnataka">Karnataka</option>
+		<option value="Kerala">Kerala</option>
+		<option value="Lakshadweep">Lakshadweep</option>
+		<option value="Madhya Pradesh">Madhya Pradesh</option>
+		<option value="Maharashtra" selected>Maharashtra</option>
+		<option value="Manipur">Manipur</option>
+		<option value="Meghalaya">Meghalaya</option>
+		<option value="Mizoram">Mizoram</option>
+		<option value="Nagaland">Nagaland</option>
+		<option value="Orissa">Orissa</option>
+		<option value="Puducherry">Puducherry</option>
+		<option value="Punjab">Punjab</option>
+		<option value="Rajasthan">Rajasthan</option>
+		<option value="Sikkim">Sikkim</option>
+		<option value="Tamil Nadu">Tamil Nadu</option>
+		<option value="Tripura">Tripura</option>
+		<option value="Uttar Pradesh">Uttar Pradesh</option>
+		<option value="Uttarakhand">Uttarakhand</option>
+		<option value="West Bengal">West Bengal</option>
+		</select></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Country</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<select size="1" name="Country" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">
+			<option selected value="India">India</option>
+			</select></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Longitude</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="Longitude" size="20" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF"></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Latitude</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="Latitude" size="20" style="font-size: 12pt; color: #0000FF; font-family: Lucida Sans Unicode"></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Urs Date </font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<select size="1" name="ursdate" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">
+<option value="UnKnown">UnKnown</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+			</select></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Urs Month</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<select size="1" name="ursmonth" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF">
+			<option selected value="UnKnown">UnKnown</option>
+			<option value="MUHARRAM">MUHARRAM</option>
+<option value="SAFAR">SAFAR</option>
+<option value="RABI-AL-AWWAL">RABI-AL-AWWAL</option>
+<option value="RABI-AL-THANI">RABI-AL-THANI</option>
+<option value="JUMADA-AL-AWWAL">JUMADA-AL-AWWAL</option>
+<option value="JUMADA-AL-THANI">JUMADA-AL-THANI</option>
+<option value="RAJAB">RAJAB</option>
+<option value="SHABAN">SHABAN</option>
+<option value="RAMADAN">RAMADAN</option>
+<option value="SHAWWAL">SHAWWAL</option>
+<option value="ZUL-QAADAH">ZUL-QAADAH</option>
+<option value="ZUL-HIJJAH">ZUL-HIJJAH</option>
+</select></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Submitters Name</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="sname" size="40" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF"></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Submitters Contact </font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="scontact" size="20" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF"></font></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Submitters E-Mail</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<input type="text" name="semail" size="40" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF"></font></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">
+			<font face="Lucida Sans Unicode">
+			<input type="submit" value="Submit" name="submit" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" value="Reset" name="reset" style="color: #0000FF; font-family: Lucida Sans Unicode; font-size: 12pt"></font></td>
+		</tr>
+	</table>
+</div>
+
+			</td>
+		</tr>
+	</table>
+</div>
+</form>
+<h3 class="wb-stl-heading3" style="text-align: center;">Note : Urs Date &amp; Month Is According To Urdu Calendar.</h3>
+
+<h3 class="wb-stl-heading3" style="text-align: center;">If Possible Please Send The Image To 
+<a data-type="email" data-url="fasayyed@gmail.com" href="mailto:fasayyed@gmail.com" style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; font-family: 'Trebuchet MS', sans-serif; text-align: left; text-decoration: none; color: #000000; line-height: normal">fasayyed@gmail.com</a><br>
+(1 Image In Which Complete Dargah Is Visible)</h3>
 </body>
 </html>
