@@ -1,35 +1,81 @@
 <html>
-
 <head>
-<meta http-equiv="Content-Language" content="en-us">
-<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
-<meta name="ProgId" content="FrontPage.Editor.Document">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <title>WaliAllahs Around - Add Page</title>
-<style>
-<!--
-		.wb-stl-heading3 { font: normal normal 16px Trebuchet MS,sans-serif; text-align: left; text-decoration: none; color: #858585; line-height: normal; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
--->
-</style>
+<script>
+var country, state, city;
+function createCORSRequest(method, url) 
+{
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) // XHR for Chrome/Firefox/Opera/Safari.
+  {    xhr.open(method, url, true);  } 
+  else if (typeof XDomainRequest != "undefined") // XDomainRequest for IE.
+			{	xhr = new XDomainRequest();		xhr.open(method, url);		 } 
+		else // CORS not supported.
+		{    xhr = null;  }
+  return xhr;
+}
+
+function getLocation()
+{
+  if (navigator.geolocation)
+    { navigator.geolocation.getCurrentPosition(showPosition);   }
+}
+function showPosition(position)
+  {
+	var lat = document.getElementById('latitude').value = position.coords.latitude;
+	var lon = document.getElementById('longitude').value = position.coords.longitude;
+	var url="http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lon+"&sensor=true";
+	//document.getElementById('address').value = url;
+	var xhr = createCORSRequest('POST', url);
+	if (!xhr) 	{  alert('CORS not supported');  }
+	
+	xhr.onload = function() 
+	{
+		var data =JSON.parse(xhr.responseText);
+		if(data.results.length>0)
+		{
+		var locationDetails=data.results[0].formatted_address;
+		document.getElementById('address').value = locationDetails;
+		var value = locationDetails.split(",");
+		count = value.length;
+		country = value[count-1];
+		state = value[count-2];
+		city = value[count-3];
+		pin = state.split(" ");
+		pinCode = pin[pin.length-1];
+		state = state.replace(pinCode,' ');      
+		document.getElementById('city').value = city;
+		document.getElementById('state').value = state;
+		document.getElementById('country').value = country;
+		// document.getElementById("address").innerHTML=country+" | "+state+" | "+city+"  | "+pinCode;
+		}
+		else
+            {
+             document.getElementById("messageBox").style.visibility="visible";
+             document.getElementById("message").innerHTML="No location available for provided details.";
+            }
+	 }
+    xhr.onerror = function() { alert('Woops, there was an error making the request.'); }
+	xhr.send();
+  }
+</script>
 </head>
 
-<body>
+<body onLoad="getLocation()">
 <center>
-<h3>	<font face="Lucida Sans Unicode"> Auzubillah Minashaitan Nirajeem <br> Bismillah Hirrahman Nirrahim</font></h3>
+<h3>	<font face="Lucida Sans Unicode"> Bismillah Hirrahman Nirrahim</font></h3>
 <form method="post" action="http://waliallahs-around.meximas.com/msave.php">
 <div align="center">
 	<table border="1" cellpadding="0" cellspacing="0" bordercolorlight="#000000" bordercolordark="#000000" >
 		<tr>
 			<td>
-
 <div align="center">
 	<table border="0" cellspacing="1" bordercolorlight="#000000" bordercolordark="#000000">
-		<!-- MSTableType="layout" -->
 		<tr>
 			<td></td>
 			<td align="left" valign="top" rowspan="2">
 			<font face="Lucida Sans Unicode">
-			<input type="text" name="Name" size="40" value="Hazrat" style="font-family: Lucida Sans Unicode; color: #0000FF; font-size: 12pt"></font></td>
+			<input type="text" name="Name" size="35" value="Hazrat" style="font-family: Lucida Sans Unicode; color: #0000FF; font-size: 12pt"></font></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top" >
@@ -40,28 +86,29 @@
 			<font face="Lucida Sans Unicode">Address Of Dargah</font></td>
 			<td align="left" valign="top" >
 			<font face="Lucida Sans Unicode">
-			<textarea rows="4" name="Address" cols="40" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">Dargah Hazrat</textarea></font></td>
+			<textarea rows="5" name="Address" cols="36" id="address" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF"></textarea></font></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
 			<font face="Lucida Sans Unicode">Silsila / Chain</font></td>
 			<td align="left" valign="top">
 			<font face="Lucida Sans Unicode">
-			<input type="text" name="Chain" size="40" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF" value="UnKnown"></font></td>
+			<input type="text" name="Chain" size="35" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF" value="UnKnown"></font></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
 			<font face="Lucida Sans Unicode">City</font></td>
 			<td align="left" valign="top" >
 			<font face="Lucida Sans Unicode">
-			<input type="text" name="City" size="20" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF" value="UnKnown"></font></td>
+			<input type="text" name="City" size="20" id="city" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF" value="UnKnown"></font></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
 			<font face="Lucida Sans Unicode">State</font></td>
 			<td align="left" valign="top" >
 			<font face="Lucida Sans Unicode">
-			<select size="1" name="State" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">		
+			<input type="text" id="state" name="state" size="20" style="font-size: 12pt; color: #0000FF; font-family: Lucida Sans Unicode">
+			<!--<select size="1" name="State" id="state" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">		
 		<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
 		</option>
 		<option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -83,7 +130,7 @@
 		<option value="Kerala">Kerala</option>
 		<option value="Lakshadweep">Lakshadweep</option>
 		<option value="Madhya Pradesh">Madhya Pradesh</option>
-		<option value="Maharashtra" selected>Maharashtra</option>
+		<option value="Maharashtra">Maharashtra</option>
 		<option value="Manipur">Manipur</option>
 		<option value="Meghalaya">Meghalaya</option>
 		<option value="Mizoram">Mizoram</option>
@@ -98,31 +145,37 @@
 		<option value="Uttar Pradesh">Uttar Pradesh</option>
 		<option value="Uttarakhand">Uttarakhand</option>
 		<option value="West Bengal">West Bengal</option>
-		</select></font></td>
+		</select>
+		-->
+		</font></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
 			<font face="Lucida Sans Unicode">Country</font></td>
 			<td align="left" valign="top" >
 			<font face="Lucida Sans Unicode">
-			<select size="1" name="Country" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">
-			<option selected value="India">India</option>
-			</select></font></td>
-		</tr>
-		<tr>
-			<td align="right" valign="top">
-			<font face="Lucida Sans Unicode">Longitude</font></td>
-			<td align="left" valign="top" >
-			<font face="Lucida Sans Unicode">
-			<input type="text" name="Longitude" size="20" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF"></font></td>
+			<input type="text" id="country" name="country" size="20" style="font-size: 12pt; color: #0000FF; font-family: Lucida Sans Unicode">
+			<!--<select size="1" name="country" id="country" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF">
+			<option value="India">India</option>
+			</select>-->
+			</font></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
 			<font face="Lucida Sans Unicode">Latitude</font></td>
 			<td align="left" valign="top" >
 			<font face="Lucida Sans Unicode">
-			<input type="text" name="Latitude" size="20" style="font-size: 12pt; color: #0000FF; font-family: Lucida Sans Unicode"></font></td>
+			<input type="text" id="latitude" name="Latitude" size="20" style="font-size: 12pt; color: #0000FF; font-family: Lucida Sans Unicode">
+			</font></td>
 		</tr>
+		<tr>
+			<td align="right" valign="top">
+			<font face="Lucida Sans Unicode">Longitude</font></td>
+			<td align="left" valign="top" >
+			<font face="Lucida Sans Unicode">
+			<input type="text" id="longitude" name="Longitude" size="20" style="font-family: Lucida Sans Unicode; font-size: 12pt; color: #0000FF"></font></td>
+		</tr>
+
 		<tr>
 			<td align="right" valign="top">
 			<font face="Lucida Sans Unicode">Urs Date </font></td>
@@ -188,7 +241,7 @@
 			<font face="Lucida Sans Unicode">Submitters Name</font></td>
 			<td align="left" valign="top" >
 			<font face="Lucida Sans Unicode">
-			<input type="text" name="sname" size="40" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF"></font></td>
+			<input type="text" name="sname" size="35" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF"></font></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
@@ -202,7 +255,7 @@
 			<font face="Lucida Sans Unicode">Submitters E-Mail</font></td>
 			<td align="left" valign="top" >
 			<font face="Lucida Sans Unicode">
-			<input type="text" name="semail" size="40" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF"></font></td>
+			<input type="text" name="semail" size="35" style="font-size: 12pt; font-family: Lucida Sans Unicode; color: #0000FF"></font></td>
 		</tr>
 		<tr>
 			<td align="center" colspan="2">
@@ -212,16 +265,15 @@
 		</tr>
 	</table>
 </div>
-
 			</td>
 		</tr>
 	</table>
 </div>
 </form>
-<h3 class="wb-stl-heading3" style="text-align: center;">Note : Urs Date &amp; Month Is According To Urdu Calendar.</h3>
+<p><font face="Lucida Sans Unicode">Note : Urs Date &amp; Month Is According To Urdu Calendar.</font></p>
 
-<h3 class="wb-stl-heading3" style="text-align: center;">If Possible Please Send The Image To 
-<a data-type="email" data-url="fasayyed@gmail.com" href="mailto:fasayyed@gmail.com" style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; font-family: 'Trebuchet MS', sans-serif; text-align: left; text-decoration: none; color: #000000; line-height: normal">fasayyed@gmail.com</a><br>
-(1 Image In Which Complete Dargah Is Visible)</h3>
+<p><font face="Lucida Sans Unicode">If Possible Please Send The Image To 
+<a data-type="email" data-url="fasayyed@gmail.com" href="mailto:fasayyed@gmail.com">fasayyed@gmail.com</a><br>
+(1 Image In Which Complete Dargah Is Visible)</font></p>
 </body>
 </html>
